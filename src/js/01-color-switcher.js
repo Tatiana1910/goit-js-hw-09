@@ -15,6 +15,7 @@ function onStartChangeColor() {
   timerId = setInterval(() => {
     body.style.backgroundColor = getRandomHexColor();
     startBtn.disabled = true;
+    stopBtn.disabled = false;
   }, 1000);
 }
 
