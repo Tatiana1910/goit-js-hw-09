@@ -39,6 +39,12 @@ function onStartTimer() {
   let timer = setInterval(() => {
     const countDate = new Date(input.value) - new Date();
     const { days, hours, minutes, seconds } = convertMs(countDate);
+
+    timerDays.textContent = addLeadingZero(days);
+    timerHours.textContent = addLeadingZero(hours);
+    timerMinutes.textContent = addLeadingZero(minutes);
+    timerSeconds.textContent = addLeadingZero(seconds);
+
     console.log(`${days}:${hours}:${minutes}:${seconds}`);
 
     if (countDate <= 1000) {
@@ -59,20 +65,13 @@ function convertMs(ms) {
   const day = hour * 24;
 
   // Remaining days
-  const days = addLeadingZero(Math.floor(ms / day));
+  const days = Math.floor(ms / day);
   // Remaining hours
-  const hours = addLeadingZero(Math.floor((ms % day) / hour));
+  const hours = Math.floor((ms % day) / hour);
   // Remaining minutes
-  const minutes = addLeadingZero(Math.floor(((ms % day) % hour) / minute));
+  const minutes = Math.floor(((ms % day) % hour) / minute);
   // Remaining seconds
-  const seconds = addLeadingZero(
-    Math.floor((((ms % day) % hour) % minute) / second)
-  );
-
-  timerDays.textContent = days;
-  timerHours.textContent = hours;
-  timerMinutes.textContent = minutes;
-  timerSeconds.textContent = seconds;
+  const seconds = Math.floor((((ms % day) % hour) % minute) / second);
 
   return { days, hours, minutes, seconds };
 }
